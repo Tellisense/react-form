@@ -3,12 +3,12 @@ import React from "react";
 import "./App.css";
 
 import Form from "./components/Form";
-import Blogs from "./views/Blogs";
+import BlogView from "./views/BlogView";
 
 function App() {
   return (
     <>
-      <Blogs />
+      <BlogView />
       {/* <Form /> */}
     </>
   );

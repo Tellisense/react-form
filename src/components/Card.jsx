@@ -1,9 +1,16 @@
 import React from 'react'
 
+
 const Card = ({ title, content, date, author, image }) => {
+
+  const handleClick = () => {
+    console.log(`you clicked`)
+  }
+
+
   return (
-    <div className="p-12">
-      <div className="w-96 m-auto ">
+    <div onClick={handleClick} className="px-12 py-4 cursor-pointer">
+      <div className="w- m-auto ">
         <div
           className=" grid grid-cols-3 grid-rows-7 grid-flow-row overflow-hidden rounded-lg shadow-md bg-white hover:shadow-xl transition-shadow duration-300 ease-in-out"
         >
@@ -34,7 +41,7 @@ const Card = ({ title, content, date, author, image }) => {
               </h1>
               <p className="text-grey-darker text-sm">{date}</p>
             </header>
-            <p className=" p-4 text-grey-darker text-sm">{content}</p>
+            <p className="mb-8 p-4 line-clamp-4 text-grey-darker text-sm">{content}</p>
           </div>
         </div>
       </div>

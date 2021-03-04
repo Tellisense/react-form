@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Card from '../components/Card'
+import Card from './Card'
 import axios from 'axios'
 
 const Blogs = () => {
@@ -21,7 +21,6 @@ const Blogs = () => {
 
 
   return (
-
     <div class="grid grid-flow-col grid-cols-3 grid-rows-3 gap-4">
       {blogs?.map(item => {
         return (

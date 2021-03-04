@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 export default function Form() {
+  const [file, setFile] = useState(null)
   const [formData, setFormData] = useState({
     title: "",
-    content: ""
+    content: "",
+    image: `/uploads/2_4d8b1037e3.jpg`
   })
+
+
 
   const handleChange = e => {
     setFormData({
@@ -13,21 +18,35 @@ export default function Form() {
     })
   }
 
-  const handleSubmit = e => {
+  const handleFileChange = e => {
+    setFile(e.target.files[0]);
+  };
 
+  const handleSubmit = e => {
     e.preventDefault()
-    console.log(formData)
+    let data = new FormData();
+    data.append(
+      "files",
+      file
+    );
+    console.log(`data being sent: `, file)
+    axios
+      .post('http://localhost:1337/blogs', formData)
+      .then(response => {
+        console.log(`data blog received: `, response);
+      });
+    axios
+      .post('http://localhost:1337/upload', data)
+      .then(response => {
+        console.log(`data received files: `, response);
+      });
+
     setFormData({
       title: '',
-      content: ''
+      content: '',
     })
+    setFile(null)
   }
-
-  const handleKeyPress = e => {
-    console.log(e.key)
-
-  }
-
 
 
   return (
@@ -36,10 +55,11 @@ export default function Form() {
         <div className="flex flex-wrap -mx-3 mb-6">
           <h2 className="px-4 pt-3 pb-2 text-gray-800 text-lg">Add blog article</h2>
           <div className="w-full md:w-full px-3 mb-2 mt-2">
-            <input onKeyPress={handleKeyPress} type="text" className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" onChange={handleChange} name="title" value={formData.title} placeholder='enter Title...' required />
+            <input type="text" className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" onChange={handleChange} name="title" value={formData.title} placeholder='enter Title...' required />
           </div>
           <div className="w-full md:w-full px-3 mb-2 mt-2">
-            <textarea type="text" className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="content" placeholder='blog content...' value={formData.content} onChange={handleChange} required></textarea>
+            <textarea type="text" className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white" name="content" placeholder='blog content...' value={formData.content} onChange={handleChange} required />
+            <input type="file" onChange={handleFileChange} />
           </div>
           <div className="w-full md:w-full flex items-start md:w-full px-3">
             <div className="-mr-1">
@@ -48,7 +68,7 @@ export default function Form() {
           </div>
         </div>
       </form>
-    </div>
+    </div >
   )
 }
 

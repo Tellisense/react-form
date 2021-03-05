@@ -6,7 +6,7 @@ export default function Form() {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    image: `/uploads/2_4d8b1037e3.jpg`
+    image: ""
   })
 
 

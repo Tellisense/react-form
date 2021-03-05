@@ -41,7 +41,7 @@ const Card = ({ title, content, date, author, image }) => {
               </h1>
               <p className="text-grey-darker text-sm">{date}</p>
             </header>
-            <p className="mb-8 p-4 line-clamp-4 text-grey-darker text-sm">{content}</p>
+            <p className="mb-8 p-4 line-clamp-3 text-grey-darker text-sm">{content}</p>
           </div>
         </div>
       </div>
